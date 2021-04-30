@@ -1,0 +1,48 @@
+\documentclass[../thesis.tex]{subfiles}
+
+\begin{document}
+\chapter{Cool Paper Title} \label{chap:firstpaper}
+
+    \blindtext[1]
+
+    \section{Introduction}
+
+    \lettrine{R}{obots} are even more awesome when you publish papers.
+    \blindtext[3]
+
+\section{TikZ Picture}
+
+    \blindtext[2]
+    \begin{figure}
+        \centering
+        \includegraphics[height=5cm]{firstpaper/tangent_plane.tikz}
+        \caption{
+            When linearizing about a point $q$ on an sphere $\mathbb{S}^{n-1}$ in 
+            n-dimensional space, the tangent space $T$ is a plane living in $\R^{n-1}$, 
+            illustrated here with $n=3$. Therefore, when linearizing about a unit 
+            quaternion $q \in \Q$, the space of differential rotations lives in $\R^3$.
+        }
+        \label{fig:tangent_plane}
+    \end{figure}
+    \blindtext
+
+\section{Algorithm}
+
+    \begin{algorithm}
+    \begin{algorithmic}[1]
+    \caption{Cool Algorithm} \label{alg:BP}
+        \Function{MyAlg}{$X,U$} 
+            \State $x \leftarrow 0$
+            \For{k=N-1:-1:0} 
+                \If{$\epsilon < 0$}
+                    \State Do something 
+                \Else
+                    \State Do something else 
+                \EndIf
+            \EndFor\\
+        \Return{$x + 1$}
+    \EndFunction
+    \end{algorithmic}
+    \end{algorithm}
+
+\end{document}

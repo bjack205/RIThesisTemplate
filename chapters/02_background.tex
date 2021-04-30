@@ -1,0 +1,87 @@
+\documentclass[../thesis.tex]{subfiles}
+
+\begin{document}
+\chapter{Background}
+
+\section{Notation}
+    \blindtext[2]
+
+\section{Optimization Example}
+So far we have discussed methods for solving trajectory optimization problems
+without formally defining the trajectory optimization problem. While
+trajectory optimization problems can take a variety of forms, in robotics we
+often deal with problems of the following form:
+
+\begin{mini}[2] 
+	{x(t),u(t)}{\ell(x(t_f)) + \int_0^{t_f} \ell(x(t),u(t)) dt }{}{} 
+	\addConstraint{\dot{x} = f(x,u)} 
+	\addConstraint{x(0)}{=x_\text{init}}
+	\addConstraint{g(x(t),u(t))}{=0} 
+	\addConstraint{h(x(t),u(t))}{\leq0}
+\label{opt:trajopt}, \end{mini} 
+where $x(t)$ and $u(t)$ are the state and control trajectories from time $0$
+to $t_f$, respectively. Unlike most optimization problems,
+\eqref{opt:trajopt} is an infinite-dimensional nonlinear optimization
+problem, since the optimization variables $x(t)$ and $u(t)$ are arbitrary
+continuous-time trajectories. Adding further complexity, the dynamics
+constraint $\dot{x} = f(x,u)$ constrains the derivatives of the optimization
+variables, implying the need to solve differential equations.
+
+\blindtext[2]
+
+\section{Equations Example}
+    \blindtext[1]
+    \begin{equation}
+        \begin{aligned}
+            V_x(x) =& Q(x_k,u_k^*) \\
+            =& \half \big(x_k^T Q_k x_k + x_k^T K_k^T R_k K_k x_k  
+            +  x_k^T(A_k - B_k K_k)^T P_{k+1} (A_k - B_k K_k )x_k \big) \\
+            =& \half x^T \big( Q_k +  A_k^T P_{k+1} A_k  
+            + K_k^T (R_k + B^T P_{k+1} B_k) K_k  \\
+            &- K_k^T B_k^T P_{k+1} A_k - A_k P_{k+1} B_k K_k \big)x_k \\
+            =& \half x_k^T P_k x_k
+        \end{aligned}
+    \end{equation}
+
+    \blindtext[1]
+    \begin{subequations}
+        \begin{align}
+            \nabla_x f(x) + \nabla_x g(x)^T \lambda - \nabla_x h(x)^T \mu &= 0 && \text{stationarity}\\
+            g(x) &= 0 && \text{primal feasibility}\\
+            h(x) &\leq 0 && \text{primal feasibility}\\
+            \mu_i &\geq 0, \; i \in \mathbb{N}_p && \text{dual feasibility}\\
+            \mu_i h(x)_i &=0, \; i \in \mathbb{N}_p && \text{complimentarity}.
+        \end{align}
+        \label{eq:nlp_kkt}
+    \end{subequations}
+
+    \blindtext[1]
+    \begin{equation}
+        \begin{bmatrix}
+            \nabla^2 \mathcal{L} & 0 & \nabla g^T & \nabla h^T \\
+            0 & \Sigma & 0 & -I \\
+            \nabla g & 0 & 0 & 0 \\
+            \nabla h & -I & 0 & 0 \\
+        \end{bmatrix} 
+        \begin{bmatrix}
+            \Delta x \\
+            \Delta s \\
+            -\Delta \lambda \\
+            -\Delta \mu\\
+        \end{bmatrix} = -
+        \begin{bmatrix}
+            \nabla f(x) + \nabla g(x)^T \lambda + \nabla h(x)^T \mu \\
+            \mu - \rho I(s)^{-1} e \\
+            g(x) \\
+            h(x) + s \\
+        \end{bmatrix}
+    \end{equation}
+
+
+\section{More Background}
+    \blindtext[2]
+
+    \subsection{A Sub-section}
+    \blindtext[2]
+
+\end{document}
